@@ -91,6 +91,14 @@ const Navbar = () => {
             ))}
           </ul>
           <div className="flex items-center gap-4 border-l border-white/10 pl-6 text-mutedForeground">
+            <a 
+              href="/Muthu%20Mariappan%20Resume.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-foreground transition-all text-sm font-medium mr-2"
+            >
+              Resume
+            </a>
             <a href="https://github.com/muthu1838" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
               <GithubIcon className="w-5 h-5" />
             </a>
@@ -133,6 +141,14 @@ const Navbar = () => {
               ))}
             </ul>
             <div className="flex items-center gap-6 pt-4 border-t border-white/10">
+              <a 
+                href="/Muthu%20Mariappan%20Resume.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white transition-all text-sm font-medium mr-2"
+              >
+                Resume
+              </a>
               <a href="https://github.com/muthu1838" target="_blank" rel="noopener noreferrer">
                 <GithubIcon className="w-6 h-6" />
               </a>

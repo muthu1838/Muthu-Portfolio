@@ -178,6 +178,15 @@ const Hero = () => {
             <a href="#contact" className="premium-button premium-button-secondary">
               Let's Connect
             </a>
+            <a 
+              href="/Muthu%20Mariappan%20Resume.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="premium-button premium-button-secondary group flex items-center gap-2"
+            >
+              Resume
+              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
           </motion.div>
 
           {/* Stats row */}
