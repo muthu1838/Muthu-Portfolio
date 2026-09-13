@@ -1,122 +1,124 @@
 import { motion } from 'framer-motion';
-import { springStagger, fadeIn, revealFromBottom, floatAnimation } from '../utils/animations';
-import { Award, GraduationCap, ExternalLink } from 'lucide-react';
-
-const certifications = [
-  {
-    title: 'AWS Certified Solutions Architect – Associate',
-    issuer: 'Simplilearn',
-    year: '2025',
-    color: 'text-yellow-400',
-    bg: 'bg-yellow-400/10',
-    border: 'border-yellow-400/20',
-  },
-  {
-    title: 'Python Certification',
-    issuer: 'Kaggle',
-    year: '2023',
-    color: 'text-sky-400',
-    bg: 'bg-sky-400/10',
-    border: 'border-sky-400/20',
-  },
-];
+import { education, certifications } from '../data/education';
+import { GraduationCap, Award, CheckCircle } from 'lucide-react';
+import { fadeIn, staggerContainer } from '../utils/animations';
 
 const EducationCertifications = () => {
   return (
-    <section className="w-full max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-24">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+    <section className="relative w-full max-w-7xl mx-auto px-6 md:px-12 py-28 md:py-36 border-t border-white/10 bg-[#050508]">
+      {/* Editorial Section Index */}
+      <div className="flex items-center gap-3 mb-10">
+        <span className="text-xs font-mono text-blue-400 font-bold tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
+          07 // ACADEMIC FOUNDATIONS &amp; CREDENTIALS
+        </span>
+        <div className="h-px flex-1 max-w-[120px] bg-blue-500/20" />
+      </div>
 
-        {/* ── Education ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+        
+        {/* ── Left: Academic Foundation ── */}
         <motion.div
-          variants={springStagger}
+          variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
+          className="flex flex-col justify-between"
         >
-          <motion.p
-            variants={revealFromBottom}
-            className="text-xs font-semibold uppercase tracking-[0.25em] text-accent mb-6"
-          >
-            Education
-          </motion.p>
-          <motion.div variants={fadeIn} className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.3)]">
-              <GraduationCap className="w-5 h-5 text-accent" />
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shadow-sm">
+                <GraduationCap className="w-5 h-5" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                Academic Background
+              </h2>
             </div>
-            <h2 className="text-2xl font-bold tracking-tight">Academic Background</h2>
-          </motion.div>
 
-          <motion.div
-            variants={fadeIn}
-            className="mouse-glow glass-panel p-6 md:p-8 border-l-4 border-l-accent group hover:border-l-accent transition-all duration-300"
-            onMouseMove={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-              e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-            }}
-          >
-            <div className="text-xs font-mono text-accent/80 mb-3 tracking-wide">2021 — 2025</div>
-            <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
-              B.E. Computer Science &amp; Engineering
-            </h3>
-            <div className="text-sm text-mutedForeground mb-5">
-              Dr. Sivanthi Aditanar College of Engineering
+            <div className="premium-card p-6 md:p-8 bg-[#0D1117]/85 border border-white/10 shadow-xl hover:border-blue-500/40 transition-all duration-300">
+              <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10 text-xs font-mono">
+                <span className="text-blue-400 font-bold">{education.period}</span>
+                <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/25 font-bold">
+                  {education.score}
+                </span>
+              </div>
+
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">
+                {education.degree}
+              </h3>
+              <div className="text-base text-blue-400 font-semibold mb-3">
+                {education.field}
+              </div>
+
+              <p className="text-sm font-mono text-slate-400 mb-6 font-medium">
+                {education.institution} · {education.location}
+              </p>
+
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+                {education.description}
+              </p>
+
+              <div className="space-y-2 pt-4 border-t border-white/10">
+                {education.highlights.map((h, i) => (
+                  <div key={i} className="flex items-start gap-2.5 text-xs text-slate-200 font-medium">
+                    <CheckCircle className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
+                    <span>{h}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="inline-flex items-center px-4 py-1.5 text-sm font-semibold rounded-full bg-accent/10 border border-accent/20 text-accent group-hover:bg-accent/20 transition-colors">
-              CGPA: 7.71 / 10
-            </div>
-          </motion.div>
+          </div>
         </motion.div>
 
-        {/* ── Certifications ── */}
+        {/* ── Right: Verified Certifications ── */}
         <motion.div
-          variants={springStagger}
+          variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
+          className="flex flex-col"
         >
-          <motion.p
-            variants={revealFromBottom}
-            className="text-xs font-semibold uppercase tracking-[0.25em] text-accent mb-6"
-          >
-            Certifications
-          </motion.p>
-          <motion.div variants={fadeIn} className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.3)]">
-              <Award className="w-5 h-5 text-accent" />
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 shadow-sm">
+              <Award className="w-5 h-5" />
             </div>
-            <h2 className="text-2xl font-bold tracking-tight">Achievements</h2>
-          </motion.div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              Verified Credentials
+            </h2>
+          </div>
 
-          <div className="flex flex-col gap-5">
-            {certifications.map((cert) => (
-              <motion.div
-                key={cert.title}
-                variants={fadeIn}
-                whileHover={{ y: -5 }}
-                className={`mouse-glow glass-panel p-5 md:p-6 flex items-start gap-5 border ${cert.border} group transition-all duration-300 hover:shadow-[0_8px_30px_rgba(255,255,255,0.05)]`}
-                onMouseMove={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                  e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-                }}
-              >
-                <div className={`w-10 h-10 rounded-xl ${cert.bg} border ${cert.border} flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition-transform`}>
-                  <Award className={`w-5 h-5 ${cert.color}`} />
-                </div>
-                <div className="flex-1">
-                  <h3 className={`text-base font-bold text-foreground mb-1.5 group-hover:${cert.color} transition-colors`}>
+          <div className="space-y-4">
+            {certifications.map((cert) => {
+              const isAws = cert.id === 'aws-csa';
+              const badgeBg = isAws ? 'bg-amber-500/10 text-amber-400 border-amber-500/25' : 'bg-cyan-500/10 text-cyan-400 border-cyan-500/25';
+
+              return (
+                <motion.div
+                  key={cert.id}
+                  variants={fadeIn}
+                  className="premium-card p-6 bg-[#0D1117]/85 border border-white/10 shadow-md hover:border-white/20 transition-all duration-300 group"
+                >
+                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10 text-xs font-mono">
+                    <span className={`px-2.5 py-0.5 rounded-full border font-bold flex items-center gap-1.5 ${badgeBg}`}>
+                      <span className="w-1.5 h-1.5 rounded-full bg-current" />
+                      {cert.badge}
+                    </span>
+                    <span className="text-slate-400 font-semibold">{cert.year}</span>
+                  </div>
+
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-1 group-hover:text-blue-300 transition-colors">
                     {cert.title}
                   </h3>
-                  <div className="flex items-center gap-2 text-sm text-mutedForeground">
-                    <span>{cert.issuer}</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-mutedForeground/40" />
-                    <span className="font-mono text-xs">{cert.year}</span>
+
+                  <div className="text-xs font-mono text-slate-400 mb-3">
+                    Issuer: <span className="text-slate-200 font-semibold">{cert.issuer}</span> · {cert.category}
                   </div>
-                </div>
-                <ExternalLink className="w-4 h-4 text-mutedForeground/40 group-hover:text-accent group-hover:-translate-y-1 group-hover:translate-x-1 transition-all shrink-0 mt-1" />
-              </motion.div>
-            ))}
+
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    {cert.description}
+                  </p>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
 

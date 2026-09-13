@@ -1,160 +1,222 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowUpRight, FileText } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './ui/Icons';
-import { clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-// Utility for Tailwind classes
-export function cn(...inputs) {
-  return twMerge(clsx(inputs));
-}
+import { socials } from '../data/socials';
 
 const navLinks = [
   { name: 'About', href: '#about' },
+  { name: 'Stack', href: '#tech' },
   { name: 'Experience', href: '#experience' },
   { name: 'Projects', href: '#projects' },
+  { name: 'Process', href: '#process' },
   { name: 'Contact', href: '#contact' },
 ];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState('about');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 25);
 
-      // Simple active section detection
-      const sections = navLinks.map(link => link.href.substring(1));
+      const sections = ['about', 'tech', 'experience', 'projects', 'process', 'contact'];
       let current = '';
+
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
+          if (rect.top <= 200 && rect.bottom >= 150) {
             current = section;
           }
         }
       }
-      setActiveSection(current);
+      if (current) setActiveSection(current);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <header
-      className={cn(
-        "fixed z-50 transition-all duration-300",
-        isScrolled 
-          ? "top-4 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:w-[calc(100%-2rem)] md:max-w-5xl rounded-2xl md:rounded-full border border-white/10 bg-background/80 backdrop-blur-xl shadow-2xl py-3" 
-          : "top-0 left-0 right-0 w-full rounded-none border-b border-transparent bg-transparent py-6"
-      )}
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-2 z-50 group">
-          <img
-            src="/initials-letter-m-creative-logo-design_474888-7409.avif"
-            alt="Muthu Logo"
-            className="w-9 h-9 rounded-full object-cover ring-2 ring-white/20 group-hover:ring-accent/60 transition-all duration-300"
-          />
-          <span className="text-xl font-bold tracking-tight">Muthu.</span>
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 pt-3.5 pointer-events-none transition-all duration-300">
+      <div
+        className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl transition-all duration-300 ${
+          isScrolled
+            ? 'px-4 sm:px-5 py-2.5 rounded-full bg-[#0D1117]/85 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.8)]'
+            : 'px-2 py-3 bg-transparent border-b border-transparent'
+        }`}
+      >
+        {/* Brand Logo & Live Status */}
+        <a
+          href="#"
+          data-cursor="TOP"
+          className="flex items-center gap-2.5 group focus:outline-none"
+          aria-label="Muthu Mariappan Home"
+        >
+          <div className="relative w-8 h-8 rounded-full overflow-hidden ring-1 ring-blue-500/40 group-hover:ring-blue-400 transition-all">
+            <img
+              src="/initials-letter-m-creative-logo-design_474888-7409.avif"
+              alt="Muthu Mariappan"
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-xs sm:text-sm font-bold tracking-tight text-white flex items-center gap-1.5">
+              MUTHU
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+            </span>
+            <span className="text-[10px] font-mono text-slate-400 hidden sm:block">
+              FULL STACK DEV
+            </span>
+          </div>
         </a>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          <ul className="flex items-center gap-6 text-sm font-medium text-mutedForeground">
-            {navLinks.map((link) => (
-              <li key={link.name} className="relative">
-                <a
-                  href={link.href}
-                  className={cn(
-                    "hover:text-foreground transition-colors",
-                    activeSection === link.href.substring(1) && "text-foreground"
-                  )}
-                >
-                  {link.name}
-                </a>
-                {activeSection === link.href.substring(1) && (
+        {/* Desktop Navigation Links */}
+        <nav className="hidden md:flex items-center gap-1 bg-[#161B22]/90 border border-white/10 rounded-full px-2.5 py-1">
+          {navLinks.map((link) => {
+            const sectionKey = link.href.substring(1);
+            const isActive = activeSection === sectionKey;
+
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                data-cursor="GO"
+                className={`relative px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${
+                  isActive ? 'text-white font-semibold' : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                {isActive && (
                   <motion.div
-                    layoutId="active-nav"
-                    className="absolute -bottom-1 left-0 right-0 h-[2px] bg-foreground"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    layoutId="activeNavPill"
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600/30 to-indigo-600/30 border border-blue-500/40 shadow-[0_0_12px_rgba(59,130,246,0.3)]"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
-              </li>
-            ))}
-          </ul>
-          <div className="flex items-center gap-4 border-l border-white/10 pl-6 text-mutedForeground">
-            <a 
-              href="/Muthu%20Mariappan%20Resume.pdf" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-foreground transition-all text-sm font-medium mr-2"
-            >
-              Resume
-            </a>
-            <a href="https://github.com/muthu1838" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
-              <GithubIcon className="w-5 h-5" />
-            </a>
-            <a href="https://www.linkedin.com/in/muthu-mariappan-p-942a4828a/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
-              <LinkedinIcon className="w-5 h-5" />
-            </a>
-          </div>
+                <span className="relative z-10">{link.name}</span>
+              </a>
+            );
+          })}
         </nav>
 
-        {/* Mobile Toggle */}
+        {/* Right Action CTAs */}
+        <div className="hidden md:flex items-center gap-2.5">
+          <a
+            href={socials.resume}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="PDF"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-blue-600/20 to-indigo-600/20 hover:from-blue-600 hover:to-indigo-600 border border-blue-500/30 hover:border-transparent transition-all shadow-sm"
+          >
+            <FileText className="w-3.5 h-3.5 text-blue-400 group-hover:text-white" />
+            <span>Resume</span>
+            <ArrowUpRight className="w-3 h-3 text-slate-400" />
+          </a>
+
+          <div className="flex items-center gap-1 pl-1 border-l border-white/10">
+            <a
+              href={socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="GIT"
+              aria-label="GitHub Profile"
+              className="p-2 rounded-full text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+            >
+              <GithubIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="IN"
+              aria-label="LinkedIn Profile"
+              className="p-2 rounded-full text-slate-400 hover:text-blue-400 hover:bg-white/5 transition-colors"
+            >
+              <LinkedinIcon className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+
+        {/* Mobile Menu Trigger */}
         <button
-          className="md:hidden z-50 text-foreground p-2 -mr-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+          className="md:hidden p-2 rounded-xl text-white bg-white/5 border border-white/10 hover:bg-white/10 focus:outline-none"
         >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Drawer Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -16, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -16, scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-white/5 py-6 px-6 flex flex-col gap-6 shadow-2xl md:hidden"
+            className="pointer-events-auto absolute top-16 left-4 right-4 p-6 rounded-2xl bg-[#0D1117]/95 backdrop-blur-2xl border border-white/10 shadow-2xl flex flex-col gap-5 md:hidden z-50"
           >
-            <ul className="flex flex-col gap-4 text-lg font-medium">
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-xs font-mono uppercase text-white font-semibold tracking-wider">
+                  MUTHU MARIAPPAN P
+                </span>
+              </div>
+              <span className="text-[10px] font-mono text-slate-400">NAVIGATION</span>
+            </div>
+
+            <ul className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block hover:text-white/70"
+                    className="flex items-center justify-between py-2 text-base font-medium text-slate-200 hover:text-blue-400 transition-colors"
                   >
-                    {link.name}
+                    <span>{link.name}</span>
+                    <span className="text-xs font-mono text-slate-500">→</span>
                   </a>
                 </li>
               ))}
             </ul>
-            <div className="flex items-center gap-6 pt-4 border-t border-white/10">
-              <a 
-                href="/Muthu%20Mariappan%20Resume.pdf" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white transition-all text-sm font-medium mr-2"
+
+            <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
+              <a
+                href={socials.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold shadow-md"
               >
-                Resume
+                <FileText className="w-4 h-4" />
+                <span>View Full Resume (PDF)</span>
               </a>
-              <a href="https://github.com/muthu1838" target="_blank" rel="noopener noreferrer">
-                <GithubIcon className="w-6 h-6" />
-              </a>
-              <a href="https://www.linkedin.com/in/muthu-mariappan-p-942a4828a/" target="_blank" rel="noopener noreferrer">
-                <LinkedinIcon className="w-6 h-6" />
-              </a>
+
+              <div className="flex items-center justify-around pt-2">
+                <a
+                  href={socials.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs text-slate-400 hover:text-white"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                  <span>GitHub</span>
+                </a>
+                <a
+                  href={socials.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs text-slate-400 hover:text-blue-400"
+                >
+                  <LinkedinIcon className="w-4 h-4" />
+                  <span>LinkedIn</span>
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

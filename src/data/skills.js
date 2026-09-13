@@ -1,0 +1,131 @@
+export const skillCategories = [
+  { id: 'all', label: 'All Stack' },
+  { id: 'frontend', label: 'Frontend' },
+  { id: 'backend', label: 'Backend' },
+  { id: 'mobile', label: 'Mobile' },
+  { id: 'database', label: 'Database' },
+  { id: 'cloud', label: 'Cloud & VPS' },
+  { id: 'cms', label: 'CMS & PHP' },
+  { id: 'ai', label: 'AI & Tools' }
+];
+
+export const skills = [
+  {
+    name: 'React.js',
+    category: 'frontend',
+    level: 'Core Expertise',
+    subtext: 'Component architecture, hooks & modern state',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    highlight: true,
+  },
+  {
+    name: 'React Native',
+    category: 'mobile',
+    level: 'Mobile Architecture',
+    subtext: 'Cross-platform iOS & Android with Expo',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    highlight: true,
+  },
+  {
+    name: 'JavaScript (ES6+)',
+    category: 'frontend',
+    level: 'Core Language',
+    subtext: 'Async patterns, DOM APIs & modular syntax',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+  },
+  {
+    name: 'TypeScript',
+    category: 'frontend',
+    level: 'Type Safety',
+    subtext: 'Interfaces, generics & strong typing',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+  },
+  {
+    name: 'Node.js',
+    category: 'backend',
+    level: 'Server Runtime',
+    subtext: 'Event-driven I/O, middleware & scalable microservices',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+    highlight: true,
+  },
+  {
+    name: 'Express.js',
+    category: 'backend',
+    level: 'REST Framework',
+    subtext: 'RESTful API routing, JWT auth & controllers',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+    invertDark: true,
+  },
+  {
+    name: 'MongoDB',
+    category: 'database',
+    level: 'NoSQL Database',
+    subtext: 'Aggregation pipelines, schema modeling & indexing',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+    highlight: true,
+  },
+  {
+    name: 'SQL / MySQL',
+    category: 'database',
+    level: 'Relational Database',
+    subtext: 'Relational modeling, indexing & query tuning',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+  },
+  {
+    name: 'Tailwind CSS',
+    category: 'frontend',
+    level: 'Styling System',
+    subtext: 'Design tokens, dark mode & responsive utilities',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
+  },
+  {
+    name: 'AWS',
+    category: 'cloud',
+    level: 'Cloud Infrastructure',
+    subtext: 'EC2, S3, IAM, Cloud architecture practices',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg',
+    invertDark: true,
+    highlight: true,
+  },
+  {
+    name: 'PHP',
+    category: 'cms',
+    level: 'Server Scripting',
+    subtext: 'Object-oriented PHP, plugin hooks & custom APIs',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg',
+  },
+  {
+    name: 'WordPress & Woo',
+    category: 'cms',
+    level: 'CMS Engineering',
+    subtext: 'Custom plugin engineering & WooCommerce APIs',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg',
+    invertDark: true,
+  },
+  {
+    name: 'Git & GitHub',
+    category: 'ai',
+    level: 'Version Control',
+    subtext: 'Branch strategies, collaboration & CI pipelines',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+  },
+  {
+    name: 'AI & LLM APIs',
+    category: 'ai',
+    level: 'Gen-AI Integration',
+    subtext: 'Prompt pipelines, embedding endpoints & async synthesis',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+    highlight: true,
+  }
+];
+
+export const ecosystemNodes = [
+  { id: 'core', label: 'FULL STACK', x: 250, y: 200, type: 'center' },
+  { id: 'react', label: 'React.js', x: 100, y: 90, type: 'node' },
+  { id: 'native', label: 'React Native', x: 400, y: 90, type: 'node' },
+  { id: 'node', label: 'Node.js', x: 440, y: 220, type: 'node' },
+  { id: 'mongo', label: 'MongoDB', x: 380, y: 320, type: 'node' },
+  { id: 'aws', label: 'AWS Cloud', x: 120, y: 320, type: 'node' },
+  { id: 'php', label: 'PHP / WordPress', x: 60, y: 210, type: 'node' },
+  { id: 'ai', label: 'AI APIs', x: 250, y: 60, type: 'node' }
+];
