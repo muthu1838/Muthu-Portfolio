@@ -1,7 +1,17 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { skills, skillCategories, ecosystemNodes } from '../data/skills';
-import { Cpu } from 'lucide-react';
+import { skills, skillCategories } from '../data/skills';
+import { Cpu, Sparkles, Activity, Layers } from 'lucide-react';
+
+const enlargedNodes = [
+  { id: 'ai', label: 'AI & LLMs', sub: 'OpenAI / Gemini', x: 350, y: 70, color: '#818CF8' },
+  { id: 'react', label: 'React.js', sub: 'Frontend Tier', x: 130, y: 120, color: '#60A5FA' },
+  { id: 'native', label: 'React Native', sub: 'iOS & Android', x: 570, y: 120, color: '#818CF8' },
+  { id: 'php', label: 'PHP / CMS', sub: 'WordPress & Custom', x: 90, y: 280, color: '#94A3B8' },
+  { id: 'node', label: 'Node.js', sub: 'REST & Auth API', x: 610, y: 280, color: '#34D399' },
+  { id: 'aws', label: 'AWS Cloud', sub: 'EC2, S3 & Cloud', x: 170, y: 430, color: '#FBBF24' },
+  { id: 'mongo', label: 'MongoDB', sub: 'NoSQL & Aggregations', x: 530, y: 430, color: '#34D399' },
+];
 
 const TechStack = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -11,10 +21,12 @@ const TechStack = () => {
     ? skills
     : skills.filter(skill => skill.category === selectedCategory);
 
+  const activeNodeData = enlargedNodes.find(n => n.id === hoveredNode);
+
   return (
     <section
       id="tech"
-      className="relative w-full max-w-7xl mx-auto px-6 md:px-12 py-28 md:py-36 border-t border-white/10 bg-[#050508]"
+      className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-14 md:pt-16 pb-20 md:pb-24 border-t border-white/10 bg-[#050508]"
     >
       {/* Editorial Section Index */}
       <div className="flex items-center gap-3 mb-10">
@@ -36,7 +48,7 @@ const TechStack = () => {
         </div>
 
         {/* Category Filters */}
-        <div className="flex flex-wrap gap-1.5 p-1 rounded-2xl bg-[#0D1117] border border-white/10 w-fit">
+        <div className="flex flex-wrap gap-1.5 p-1.5 rounded-2xl bg-[#0D1117] border border-white/10 w-fit">
           {skillCategories.map((cat) => {
             const isSelected = selectedCategory === cat.id;
             return (
@@ -57,51 +69,71 @@ const TechStack = () => {
         </div>
       </div>
 
-      {/* Main Grid: Connected SVG Architecture Graph + Skills Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-10 items-start">
+      {/* Main Grid: Significantly Enlarged SVG Architecture Graph + Skills Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 items-start">
         
-        {/* Left: Interactive Connected SVG System Graph */}
-        <div className="premium-card p-6 flex flex-col items-center justify-center relative overflow-hidden bg-[#0D1117]/80 border border-white/10 shadow-lg">
+        {/* Left: Interactive Connected SVG System Graph (Enlarged & Prominent) */}
+        <div className="premium-card p-6 sm:p-8 flex flex-col items-center justify-between relative overflow-hidden bg-[#0D1117]/85 border border-white/10 shadow-2xl rounded-2xl">
+          {/* Header Panel */}
           <div className="w-full flex items-center justify-between mb-4 border-b border-white/10 pb-3 text-xs font-mono">
-            <span className="text-white font-semibold flex items-center gap-1.5">
-              <Cpu className="w-3.5 h-3.5 text-blue-400" />
-              SYSTEM_TOPOLOGY
+            <span className="text-white font-semibold flex items-center gap-2">
+              <Cpu className="w-4 h-4 text-blue-400" />
+              SYSTEM_TOPOLOGY_V2
             </span>
-            <span className="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded text-[10px] font-bold border border-emerald-500/25">
-              CONNECTED
+            <span className="text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-md text-[11px] font-bold border border-emerald-500/25 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              HIGH_BANDWIDTH
             </span>
           </div>
 
-          {/* SVG Canvas Topology */}
-          <div className="relative w-full aspect-square max-w-[320px] flex items-center justify-center">
-            <svg viewBox="0 0 500 400" className="w-full h-full overflow-visible">
+          {/* SVG Canvas Topology (Enlarged ViewBox & Radius) */}
+          <div className="relative w-full aspect-[7/5] min-h-[380px] sm:min-h-[440px] flex items-center justify-center my-2">
+            <svg viewBox="0 0 700 500" className="w-full h-full overflow-visible">
               <defs>
                 <radialGradient id="centerGlowVibrant" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#6366F1" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.4" />
+                  <stop offset="60%" stopColor="#6366F1" stopOpacity="0.1" />
+                  <stop offset="100%" stopColor="#050508" stopOpacity="0" />
+                </radialGradient>
+                <radialGradient id="orbitGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.15" />
+                  <stop offset="100%" stopColor="#38BDF8" stopOpacity="0" />
                 </radialGradient>
               </defs>
 
-              {/* Connecting Lines from Center */}
-              {ecosystemNodes.filter(n => n.type !== 'center').map((node) => {
+              {/* Background Orbital Guide Rings */}
+              <circle cx="350" cy="250" r="160" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="1" strokeDasharray="6 4" />
+              <circle cx="350" cy="250" r="210" fill="none" stroke="rgba(59,130,246,0.06)" strokeWidth="1" />
+
+              {/* Connecting Links from Center */}
+              {enlargedNodes.map((node) => {
                 const isHovered = hoveredNode === node.id;
                 return (
                   <g key={`link-${node.id}`}>
+                    {/* Underlying line */}
                     <line
-                      x1={250}
-                      y1={200}
+                      x1={350}
+                      y1={250}
                       x2={node.x}
                       y2={node.y}
-                      stroke={isHovered ? '#60A5FA' : 'rgba(255,255,255,0.12)'}
-                      strokeWidth={isHovered ? 2 : 1}
-                      strokeDasharray={isHovered ? '4 2' : 'none'}
+                      stroke={isHovered ? node.color : 'rgba(255,255,255,0.14)'}
+                      strokeWidth={isHovered ? 2.5 : 1.2}
+                      strokeDasharray={isHovered ? '5 3' : 'none'}
                       className="transition-all duration-300"
                     />
-                    {/* Animated signal dot */}
-                    <circle r="2.5" fill={isHovered ? '#60A5FA' : '#818CF8'}>
+                    {/* Animated signal dot traveling outward */}
+                    <circle r={isHovered ? '4' : '3'} fill={isHovered ? node.color : '#60A5FA'}>
                       <animateMotion
-                        path={`M 250 200 L ${node.x} ${node.y}`}
-                        dur={`${2.2 + (node.x % 3)}s`}
+                        path={`M 350 250 L ${node.x} ${node.y}`}
+                        dur={`${2.0 + (node.x % 4) * 0.3}s`}
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                    {/* Animated return packet */}
+                    <circle r="2" fill="rgba(255,255,255,0.6)">
+                      <animateMotion
+                        path={`M ${node.x} ${node.y} L 350 250`}
+                        dur={`${3.0 + (node.y % 3) * 0.4}s`}
                         repeatCount="indefinite"
                       />
                     </circle>
@@ -109,28 +141,29 @@ const TechStack = () => {
                 );
               })}
 
-              {/* Center Node: FULL STACK */}
-              <circle cx="250" cy="200" r="46" fill="url(#centerGlowVibrant)" />
-              <circle cx="250" cy="200" r="38" fill="#0D1117" stroke="#3B82F6" strokeWidth="2" />
+              {/* Center Core Node: FULL STACK ARCHITECTURE */}
+              <circle cx="350" cy="250" r="70" fill="url(#centerGlowVibrant)" />
+              <circle cx="350" cy="250" r="54" fill="#0D1117" stroke="#3B82F6" strokeWidth="2.5" className="shadow-lg" />
+              <circle cx="350" cy="250" r="48" fill="none" stroke="rgba(99,102,241,0.3)" strokeWidth="1" strokeDasharray="3 3" />
               <text
-                x="250"
-                y="196"
+                x="350"
+                y="244"
                 textAnchor="middle"
-                className="fill-white font-mono font-bold text-[11px] tracking-wider"
+                className="fill-white font-mono font-black text-[13px] tracking-wider"
               >
                 FULL STACK
               </text>
               <text
-                x="250"
-                y="212"
+                x="350"
+                y="262"
                 textAnchor="middle"
-                className="fill-blue-400 font-mono text-[9px] font-semibold"
+                className="fill-blue-400 font-mono text-[10px] font-bold tracking-widest uppercase"
               >
                 ARCHITECTURE
               </text>
 
-              {/* Orbital Nodes */}
-              {ecosystemNodes.filter(n => n.type !== 'center').map((node) => {
+              {/* Enlarged Orbital Satellite Nodes */}
+              {enlargedNodes.map((node) => {
                 const isHovered = hoveredNode === node.id;
                 return (
                   <g
@@ -139,24 +172,42 @@ const TechStack = () => {
                     onMouseLeave={() => setHoveredNode(null)}
                     className="cursor-pointer"
                   >
+                    {/* Hover Aura */}
+                    {isHovered && (
+                      <circle cx={node.x} cy={node.y} r="48" fill={node.color} opacity="0.15" />
+                    )}
+
+                    {/* Outer Node Circle */}
                     <circle
                       cx={node.x}
                       cy={node.y}
-                      r={isHovered ? 26 : 22}
+                      r={isHovered ? 36 : 30}
                       fill={isHovered ? '#1E293B' : '#0F172A'}
-                      stroke={isHovered ? '#38BDF8' : 'rgba(255,255,255,0.15)'}
-                      strokeWidth={isHovered ? 2 : 1}
+                      stroke={isHovered ? node.color : 'rgba(255,255,255,0.2)'}
+                      strokeWidth={isHovered ? 2.5 : 1.5}
                       className="transition-all duration-300"
                     />
+
+                    {/* Main Label */}
                     <text
                       x={node.x}
-                      y={node.y + 4}
+                      y={node.y - (isHovered ? 3 : 1)}
                       textAnchor="middle"
-                      className={`font-mono text-[9px] font-bold transition-colors duration-200 ${
-                        isHovered ? 'fill-blue-300' : 'fill-slate-300'
+                      className={`font-mono text-[11px] font-bold transition-colors duration-200 ${
+                        isHovered ? 'fill-white' : 'fill-slate-200'
                       }`}
                     >
                       {node.label}
+                    </text>
+
+                    {/* Subtext Tag */}
+                    <text
+                      x={node.x}
+                      y={node.y + (isHovered ? 13 : 11)}
+                      textAnchor="middle"
+                      className="font-mono text-[8px] fill-slate-400 font-medium tracking-tight"
+                    >
+                      {node.sub}
                     </text>
                   </g>
                 );
@@ -164,9 +215,22 @@ const TechStack = () => {
             </svg>
           </div>
 
-          <div className="w-full pt-4 border-t border-white/10 text-center">
-            <span className="text-[11px] font-mono text-slate-400">
-              Interactive node topology · Hover nodes to inspect routing
+          {/* Active Hover Telemetry Bar */}
+          <div className="w-full pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+            <div className="flex items-center gap-2 text-slate-400">
+              <Activity className="w-3.5 h-3.5 text-blue-400" />
+              <span>
+                {activeNodeData ? (
+                  <span className="text-white">
+                    Inspecting: <strong className="text-blue-400">{activeNodeData.label}</strong> ({activeNodeData.sub})
+                  </span>
+                ) : (
+                  'Hover over any node to inspect system flow'
+                )}
+              </span>
+            </div>
+            <span className="text-slate-400 hidden sm:inline-block">
+              Core MERN + Cloud Ecosystem
             </span>
           </div>
         </div>

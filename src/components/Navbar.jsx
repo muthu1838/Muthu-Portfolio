@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowUpRight, FileText } from 'lucide-react';
+import { Menu, X, ArrowUpRight, FileText, Sun, Moon } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './ui/Icons';
 import { socials } from '../data/socials';
+import { useTheme } from '../context/ThemeContext';
 
 const navLinks = [
   { name: 'About', href: '#about' },
@@ -17,6 +18,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
+  const { theme, toggleTheme, isDark } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,14 +56,14 @@ const Navbar = () => {
         <a
           href="#"
           data-cursor="TOP"
-          className="flex items-center gap-2.5 group focus:outline-none"
+          className="flex items-center gap-3 group focus:outline-none"
           aria-label="Muthu Mariappan Home"
         >
-          <div className="relative w-8 h-8 rounded-full overflow-hidden ring-1 ring-blue-500/40 group-hover:ring-blue-400 transition-all">
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl overflow-hidden bg-white/5 p-1 ring-1 ring-blue-500/30 group-hover:ring-blue-400 group-hover:shadow-[0_0_16px_rgba(59,130,246,0.35)] transition-all">
             <img
-              src="/initials-letter-m-creative-logo-design_474888-7409.avif"
-              alt="Muthu Mariappan"
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+              src="/logoo.png"
+              alt="Muthu Mariappan Logo"
+              className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
             />
           </div>
           <div className="flex flex-col">
@@ -103,8 +105,23 @@ const Navbar = () => {
           })}
         </nav>
 
-        {/* Right Action CTAs */}
+        {/* Right Action CTAs & Theme Toggle */}
         <div className="hidden md:flex items-center gap-2.5">
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            data-cursor="THEME"
+            aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+            className="p-2 rounded-full bg-white/5 border border-white/10 hover:border-blue-400/40 text-slate-300 hover:text-white hover:bg-white/10 transition-all flex items-center justify-center group"
+            title={`Switch to ${isDark ? 'Light' : 'Dark'} Mode`}
+          >
+            {isDark ? (
+              <Sun className="w-4 h-4 text-amber-300 transition-transform group-hover:rotate-45" />
+            ) : (
+              <Moon className="w-4 h-4 text-indigo-500 transition-transform group-hover:-rotate-12" />
+            )}
+          </button>
+
           <a
             href={socials.resume}
             target="_blank"
@@ -141,14 +158,26 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu Trigger */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle navigation menu"
-          className="md:hidden p-2 rounded-xl text-white bg-white/5 border border-white/10 hover:bg-white/10 focus:outline-none"
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        {/* Mobile Action Cluster */}
+        <div className="md:hidden flex items-center gap-2">
+          {/* Mobile Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle Theme"
+            className="p-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white"
+          >
+            {isDark ? <Sun className="w-4 h-4 text-amber-300" /> : <Moon className="w-4 h-4 text-indigo-500" />}
+          </button>
+
+          {/* Mobile Menu Trigger */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+            className="p-2 rounded-xl text-white bg-white/5 border border-white/10 hover:bg-white/10 focus:outline-none"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer Menu */}

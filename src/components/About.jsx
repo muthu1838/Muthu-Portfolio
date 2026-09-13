@@ -60,7 +60,7 @@ const About = () => {
     <section
       ref={containerRef}
       id="about"
-      className="relative w-full max-w-7xl mx-auto px-6 md:px-12 py-28 md:py-36 border-t border-white/10 bg-[#050508]"
+      className="relative w-full max-w-7xl mx-auto px-6 md:px-12 pt-20 md:pt-24 pb-12 md:pb-14 border-t border-white/10 bg-[#050508]"
     >
       {/* Editorial Section Index */}
       <div className="flex items-center gap-3 mb-10">
